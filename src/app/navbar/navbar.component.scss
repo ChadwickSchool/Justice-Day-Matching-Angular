@@ -1,0 +1,98 @@
+mat-sidenav-container,
+mat-sidenav-content,
+mat-sidenav {
+  height: 100%;
+  width: 15rem;
+  color:  rgba(9, 39, 63, 0.878);
+}
+
+mat-toolbar {
+  background-color:  rgba(9, 39, 63, 0.878);
+  height: 110px;
+}
+
+h1 {
+  text-align: center;
+  color: rgb(226, 223, 223);
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-weight: bolder;
+  text-shadow: 4px 3px #060139;
+  font-size: 200%;
+  margin-left: 70px;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  width: 500px;
+
+  //@media screen and (max-width: 1340px) {
+   // display: none;
+ // }
+}
+
+.float-image {
+  height: 87px;
+  left: 16px;
+  top: 9px;
+  position: absolute;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover,
+a:active {
+  color: lightgray;
+}
+
+.navigation-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+body {
+  padding-left: -10px;
+}
+
+.icon {
+  display: inline-block;
+  height: 30px;
+  padding-left: 30px;
+  padding-right: 0px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.home-icon {
+  padding-left: 100px;
+  padding-right: 0px;
+  text-align: center;
+  vertical-align: middle;
+  display: inline-block;
+  height: 30px;
+}
+
+.label {
+  line-height: 30px;
+  margin: 0;
+  padding-left: -40px;
+}
+#input-icon {
+  margin-right: 0.1rem;
+}
+#home-icon,
+#dash-icon,
+#sidenav-dash-icon {
+  margin-right: 0.1rem;
+}
+#workout-label {
+  margin-right: 0.1rem;
+}
+.mat-sidenav-content {
+  overflow: hidden;
+  max-width: 100%;
+  max-height: 100%;
+}

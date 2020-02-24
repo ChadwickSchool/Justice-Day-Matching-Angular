@@ -1,0 +1,31 @@
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.float-image {
+  height: 87px;
+  left: 16px;
+  top: 9px;
+  position: absolute;
+}
+
+body {
+  background-color:  rgb(226, 223, 223) ;
+}
+
+h1 {
+  text-align: center;
+  background-color:  rgba(9, 39, 63, 0.878);
+  padding-bottom: 20px;
+  padding-top: 20px;
+  color: rgb(226, 223, 223);
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-weight: bolder;
+  text-shadow: 4px 3px #060139;
+  font-size: 375%;
+  margin-top: -10px;
+  margin-right: -8px;
+  margin-left: -8px;
+}
