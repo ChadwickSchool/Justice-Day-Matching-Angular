@@ -9,6 +9,7 @@ import { StudentThankYouComponent } from './student-thank-you/student-thank-you.
 import { LoginComponent } from './login/login.component';
 import { LoginGuard } from './shared/guards/login.guard';
 import { AdminGuard } from './shared/guards/admin.guard';
+import { StudentViewProjectsComponent } from './student-view-projects/student-view-projects.component';
 
 const routes: Routes = [
   {
@@ -16,17 +17,21 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: 'student-view-projects',
+    component: StudentViewProjectsComponent,
+    canActivate: [LoginGuard]
+  },
+  {
     path: 'session1',
     component: StudentComponent,
     canActivate: [LoginGuard]
   },
+  {
+    path: 'session2',
+    component: StudentComponent2,
+    canActivate: [LoginGuard]
 
-{
-  path: 'session2',
-  component: StudentComponent2,
-  canActivate: [LoginGuard]
-
-},
+  },
   {
     path: 'teacher',
     component: TeacherComponent,

@@ -19,6 +19,7 @@ import { ThankYouComponent } from './thank-you/thank-you.component';
 import { StudentThankYouComponent } from './student-thank-you/student-thank-you.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { StudentViewProjectsComponent } from './student-view-projects/student-view-projects.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     LoginComponent,
     ThankYouComponent,
     StudentThankYouComponent,
-    NavbarComponent
+    NavbarComponent,
+    StudentViewProjectsComponent
   ],
   imports: [
     BrowserModule,

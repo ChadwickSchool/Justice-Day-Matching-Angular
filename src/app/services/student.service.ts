@@ -29,7 +29,7 @@ export class StudentService {
     return this.afs.collection<SurveyVoters>('surveyVoters', ref => ref
       .where('surveyName', '==', surveyName)).valueChanges()
         .pipe(take(1)).toPromise().then((value) => {
-          console.log('val', value)
+          console.log('val', value);
           for (let i = 0; i < value.length; i++) {
             for (let j = 0; j < value[i].students.length; j++){
               if (value[i].students[j].uid === uid) {

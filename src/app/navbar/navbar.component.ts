@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
     if (isAdmin) {
       this.router.navigate(['teacher']);
     } else {
-      this.router.navigate(['student']);
+      this.router.navigate(['session1']);
     }
   }
 }

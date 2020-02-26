@@ -5,14 +5,13 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyB0QgXZOSn6f6jxOFj6kkOncA-Fm-faxuI',
-    authDomain: 'drag-and-drop-ranking-system.firebaseapp.com',
-    databaseURL: 'https://drag-and-drop-ranking-system.firebaseio.com',
-    projectId: 'drag-and-drop-ranking-system',
-    storageBucket: 'drag-and-drop-ranking-system.appspot.com',
-    messagingSenderId: '353895387356',
-    appId: '1:353895387356:web:9d8d2ed2abe6979909a419',
-    measurementId: 'G-0BXSJKQFLQ'
+    apiKey: 'AIzaSyDfXtowxZ3oTZjl4QNoNltw5s8RnNid8sY',
+    authDomain: 'social-justice-day.firebaseapp.com',
+    databaseURL: 'https://social-justice-day.firebaseio.com',
+    projectId: 'social-justice-day',
+    storageBucket: 'social-justice-day.appspot.com',
+    messagingSenderId: '419037051608',
+    appId: '1:419037051608:web:b4bcd89d06afa28e5fb5ad'
   }
 };
 

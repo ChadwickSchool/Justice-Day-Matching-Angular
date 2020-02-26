@@ -2,17 +2,7 @@
   <div class="center">
   <div class="example-container">
    <div class="container">
-      <mat-form-field>
-        <mat-label>Select Survey</mat-label>
-          <mat-select [(value)]="surveyName">
-                 <mat-option *ngFor = "let name of surveyNames; let i = index"
-                [(value)] = "name"
-                (click)="showTasks(name)">
-                  {{name}}
-                </mat-option>
-        </mat-select>
-    </mat-form-field>
-  <div *ngIf="showChoices" class="grid">
+  <div class="grid">
    <div>
      <h2>Choices</h2>
       <div
@@ -41,7 +31,7 @@
        </div>
     </div>
       <p id='voted' [hidden]='!voted'>You've already voted for this survey</p>
-      <button mat-stroked-button [disabled]='voted' color="primary" (click)="saveChoiceOrder()" routerLink="/student-thank-you">Submit</button>
+      <button routerLink='/student-thank-you' mat-stroked-button [disabled]='voted' color="primary" (click)="saveChoiceOrder()">Submit</button>
     </div>
     </div>
     <div class="center"></div>

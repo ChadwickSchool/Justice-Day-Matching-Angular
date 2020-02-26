@@ -23,11 +23,12 @@ export class SaveChoiceService {
     return this.choices$;
   }
 
-  addChoices(choices: Array<string>, surveyName: string) {
+  addChoices(choices: Array<string>, surveyName: string, uid: string) {
     const id = this.afs.createId();
 
     const newRanking = new ChoiceClass(
       id,
+      uid,
       surveyName,
       choices
     );

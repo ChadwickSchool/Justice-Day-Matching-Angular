@@ -34,8 +34,6 @@ export class StudentComponent implements OnInit {
 
   options: Options[];
 
-  surveyNames: Array<string>;
-
   userId: string;
 
   currentUser: User;
@@ -54,13 +52,13 @@ export class StudentComponent implements OnInit {
     this.voted = false;
     this.userId = '';
     this.options = [];
-    this.surveyNames = [];
   }
 
   ngOnInit(): void {
     this.showOptions();
-    this.showChoices = false;
     this.setUpUser();
+    this.showTasks();
+    this.showChoices = false;
     // this.getOptionsService.getOptionsByName(this.surveyName).subscribe(options => {
     //   this.todo = options[0].tasks;
 
@@ -77,19 +75,18 @@ export class StudentComponent implements OnInit {
 
   async showOptions() {
     this.options = await this.getOptionsService.getOptions().pipe(take(1)).toPromise();
-    this.showSurveyNames();
   }
 
   async hasVoted() {
-    console.log(this.studentService.hasVoted(this.surveyName, this.userId));
-    this.voted = await this.studentService.hasVoted(this.surveyName, this.userId);
+    const val = await this.studentService.hasVoted('session1', this.userId);
+    console.log(val);
+    this.voted = await this.studentService.hasVoted('session1', this.userId);
     console.log(this.voted);
   }
 
-  showTasks(name: string) {
+  showTasks() {
     this.showChoices = true;
-    this.surveyName = name;
-    this.getOptionsService.getOptionsByName(this.surveyName).subscribe(options => {
+    this.getOptionsService.getOptionsByName('session1').subscribe(options => {
       this.todo = options[0].tasks;
       this.choices = [];
       for (let todo of this.todo) {
@@ -97,12 +94,6 @@ export class StudentComponent implements OnInit {
       }
     });
     this.hasVoted();
-  }
-
-  showSurveyNames() {
-    this.options.forEach(element => {
-      this.surveyNames.push(element.surveyName);
-    });
   }
 
   choiceIDs() {
@@ -129,8 +120,8 @@ export class StudentComponent implements OnInit {
     for (let i = 0; i < this.choices.length; i++) {
       this.result[i] = this.choices[i][0];
     }
-    this.saveChoiceService.addChoices(this.result, this.surveyName);
-    this.surveyVotersService.addSurveyVoters(this.surveyName, this.currentUser);
+    this.saveChoiceService.addChoices(this.result, 'session1', this.userId);
+    this.surveyVotersService.addSurveyVoters('session1', this.currentUser);
   }
 
   drop(event: CdkDragDrop<string[]>) {
