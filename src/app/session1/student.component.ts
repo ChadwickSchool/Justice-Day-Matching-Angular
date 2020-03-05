@@ -28,9 +28,19 @@ export class StudentComponent implements OnInit {
 
   todo = ['Loading...'];
 
+  todo1 = [];
+
+  todo2 = [];
+
+  todo3 = [];
+
+  todo4 = [];
+
   assignedChoices = [];
 
   choices = [];
+
+  connectionList = ['todoElement1', 'todoElement2', 'todoElement3', 'todoElement4'];
 
   options: Options[];
 
@@ -59,13 +69,6 @@ export class StudentComponent implements OnInit {
     this.setUpUser();
     this.showTasks();
     this.showChoices = false;
-    // this.getOptionsService.getOptionsByName(this.surveyName).subscribe(options => {
-    //   this.todo = options[0].tasks;
-
-    //   for (let todo of this.todo) {
-    //     this.choices.push([]);
-    //   }
-    // });
   }
 
   async setUpUser() {
@@ -79,25 +82,38 @@ export class StudentComponent implements OnInit {
 
   async hasVoted() {
     const val = await this.studentService.hasVoted('session1', this.userId);
-    console.log(val);
     this.voted = await this.studentService.hasVoted('session1', this.userId);
-    console.log(this.voted);
   }
 
   showTasks() {
+    const test = ['Pears', 'Papaya', 'Peach', 'Pineapple', 'Apple', 'Rasberry', 'Blueberry',
+    'Salad', 'Cake', 'Cupcake'];
     this.showChoices = true;
     this.getOptionsService.getOptionsByName('session1').subscribe(options => {
       this.todo = options[0].tasks;
+      test.forEach(e => {
+        this.todo.push(e);
+        // this.allOptions.push(e);
+      });
+      for (let i = 0; i < 5; i++) {
+        this.todo1.push(this.todo[i]);
+      }
+      for (let i = 5; i < 10; i++) {
+        this.todo2.push(this.todo[i]);
+      }
+      for (let i = 10; i < 15; i++) {
+        this.todo3.push(this.todo[i]);
+      }
+      for (let i = 15; i < 20; i++) {
+        this.todo4.push(this.todo[i]);
+      }
       this.choices = [];
-      for (let todo of this.todo) {
+      for (let i = 0; i < 5; i++) {
+        this.connectionList.push('choiceElement' + i);
         this.choices.push([]);
       }
     });
     this.hasVoted();
-  }
-
-  choiceIDs() {
-    return this.choices.map((choice, i) => 'choice' + i).concat(['todo']);
   }
 
   hasExtras() {
