@@ -37,11 +37,13 @@ export class StudentComponent implements OnInit {
 
   todo4 = [];
 
+  todo5 = [];
+
   assignedChoices = [];
 
   choices = [];
 
-  connectionList = ['todoElement1', 'todoElement2', 'todoElement3', 'todoElement4'];
+  connectionList = ['todoElement1', 'todoElement2', 'todoElement3', 'todoElement4', 'todoElement5'];
 
   options: Options[];
 

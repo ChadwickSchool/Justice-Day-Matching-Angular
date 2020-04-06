@@ -6,7 +6,7 @@
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Category 1
+              Options 1-5
             </mat-panel-title>
           </mat-expansion-panel-header>
           <div>
@@ -21,7 +21,7 @@
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Category 2
+              Options 6-10
             </mat-panel-title>
           </mat-expansion-panel-header>
           <div>
@@ -36,7 +36,7 @@
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Category 3
+              Options 11-15
             </mat-panel-title>
           </mat-expansion-panel-header>
           <div>
@@ -51,7 +51,7 @@
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Category 4
+              Options 16-20
             </mat-panel-title>
           </mat-expansion-panel-header>
           <div>
@@ -59,6 +59,21 @@
             <div cdkDropList id="todoElement4" [cdkDropListData]="todo4" [cdkDropListConnectedTo]="connectionList"
               class="example-list" (cdkDropListDropped)="drop($event)">
               <div class="example-box" *ngFor="let item of todo4" cdkDrag>{{item}}</div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+        <br>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Options 21-25
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <h2>Choices</h2>
+            <div cdkDropList id="todoElement5" [cdkDropListData]="todo5" [cdkDropListConnectedTo]="connectionList"
+              class="example-list" (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of todo5" cdkDrag>{{item}}</div>
             </div>
           </div>
         </mat-expansion-panel>
