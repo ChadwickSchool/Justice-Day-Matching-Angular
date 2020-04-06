@@ -17,7 +17,7 @@ export class StudentViewProjectsComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.authService.getFirebaseUserID();
-    this.projectsService.getProjects(this.userId);
+    this.projectsService.getProjectsByStudent(this.userId);
     this.projects = this.projectsService.projectNames;
   }
 

@@ -14,6 +14,7 @@ import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
 import { User } from '../shared/models/user.model';
 import { StudentService } from '../services/student.service';
+import { GetProjectsService } from '../services/get-projects.service';
 
 /**
  * @title Drag&Drop connected sorting
@@ -26,7 +27,7 @@ import { StudentService } from '../services/student.service';
 export class StudentComponent implements OnInit {
   showChoices: boolean;
 
-  todo = ['Loading...'];
+  todo = [];
 
   todo1 = [];
 
@@ -55,6 +56,7 @@ export class StudentComponent implements OnInit {
   constructor(
     private saveChoiceService: SaveChoiceService,
     private getOptionsService: GetOptionsService,
+    private projectsService: GetProjectsService,
     private surveyVotersService: SurveyVotersService,
     private userService: UserService,
     private authService: AuthService,
@@ -85,34 +87,25 @@ export class StudentComponent implements OnInit {
     this.voted = await this.studentService.hasVoted('session1', this.userId);
   }
 
-  showTasks() {
-    const test = ['Pears', 'Papaya', 'Peach', 'Pineapple', 'Apple', 'Rasberry', 'Blueberry',
-    'Salad', 'Cake', 'Cupcake'];
-    this.showChoices = true;
-    this.getOptionsService.getOptionsByName('session1').subscribe(options => {
-      this.todo = options[0].tasks;
-      test.forEach(e => {
-        this.todo.push(e);
-        // this.allOptions.push(e);
+  subscribeTo(i) {
+    this.projectsService.getProjectNames(1, 'category ' + i).subscribe(projects => {
+      projects.forEach(project => {
+        this['todo' + i].push(project.projectName);
       });
-      for (let i = 0; i < 5; i++) {
-        this.todo1.push(this.todo[i]);
-      }
-      for (let i = 5; i < 10; i++) {
-        this.todo2.push(this.todo[i]);
-      }
-      for (let i = 10; i < 15; i++) {
-        this.todo3.push(this.todo[i]);
-      }
-      for (let i = 15; i < 20; i++) {
-        this.todo4.push(this.todo[i]);
-      }
-      this.choices = [];
-      for (let i = 0; i < 5; i++) {
-        this.connectionList.push('choiceElement' + i);
-        this.choices.push([]);
-      }
     });
+  }
+
+  showTasks() {
+    this.showChoices = true;
+
+    for (let i = 0; i < 5; i++) {
+      this.connectionList.push('choiceElement' + i);
+      this.choices.push([]);
+    }
+
+    for (let i = 1; i < 5; i++) {
+      this.subscribeTo(i);
+    }
     this.hasVoted();
   }
 
@@ -147,7 +140,7 @@ export class StudentComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
-    } else if (event.currentIndex === 0) {
+    } else if (event.currentIndex === 0 || event.container.id.startsWith('todoElement')) {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
@@ -155,13 +148,15 @@ export class StudentComponent implements OnInit {
         event.currentIndex
       );
 
-      while (this.hasExtras()) {
-        for (let i = 0; i < this.choices.length; i++) {
-          if (this.choices[i].length > 1) {
-            if (i < this.choices.length - 1) {
-              transferArrayItem(this.choices[i], this.choices[i + 1], 1, 0);
-            } else {
-              transferArrayItem(this.choices[i], this.todo, 1, 0);
+      if (!event.container.id.startsWith('todoElement')) {
+        while (this.hasExtras()) {
+          for (let i = 0; i < this.choices.length; i++) {
+            if (this.choices[i].length > 1) {
+              if (i < this.choices.length - 1) {
+                transferArrayItem(this.choices[i], this.choices[i + 1], 1, 0);
+              } else {
+                transferArrayItem(this.choices[i], this.todo, 1, 0);
+              }
             }
           }
         }

@@ -1,38 +1,80 @@
 <body>
-  <div class="center">
-  <div class="example-container">
-   <div class="container">
-  <div class="grid">
-   <div>
-     <h2>Choices</h2>
-      <div
-        cdkDropList
-        id="todo"
-      [cdkDropListData]="todo"
-       [cdkDropListConnectedTo]="choiceIDs()"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-       <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
-     </div>
-   </div>
-
-  <div class="example-container">
-    <div *ngFor="let choiceList of choices; let i = index">
-      <h2>Choice {{i + 1}}</h2>
-       <div
-       cdkDropList
-       #choices[i]List="cdkDropList"
-       [id]="'choice' + i"
-       [cdkDropListData]="choices[i]"
-        [cdkDropListConnectedTo]="choiceIDs()"
-       class="example-list"
-        (cdkDropListDropped)="drop($event)">
-       <div class="example-box" *ngFor="let item of choices[i]" cdkDrag>{{item}}</div>
-       </div>
-    </div>
-      <p id='voted' [hidden]='!voted'>You've already voted for this survey</p>
-      <button routerLink='/student-thank-you' mat-stroked-button [disabled]='voted' color="primary" (click)="saveChoiceOrder()">Submit</button>
-    </div>
-    </div>
-    <div class="center"></div>
+  <div class="center" id="background-div">
+    <!-- <div class="example-container"> -->
+    <!-- <div class="container"> -->
+      <div id="left-column" class="columns">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Category 1
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <h2>Choices</h2>
+            <div cdkDropList id="todoElement1" [cdkDropListData]="todo1" [cdkDropListConnectedTo]="connectionList"
+              class="example-list" (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of todo1" cdkDrag>{{item}}</div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+        <br>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Category 2
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <h2>Choices</h2>
+            <div cdkDropList id="todoElement2" [cdkDropListData]="todo2" [cdkDropListConnectedTo]="connectionList"
+              class="example-list" (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of todo2" cdkDrag>{{item}}</div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+        <br>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Category 3
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <h2>Choices</h2>
+            <div cdkDropList id="todoElement3" [cdkDropListData]="todo3" [cdkDropListConnectedTo]="connectionList"
+              class="example-list" (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of todo3" cdkDrag>{{item}}</div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+        <br>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Category 4
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <h2>Choices</h2>
+            <div cdkDropList id="todoElement4" [cdkDropListData]="todo4" [cdkDropListConnectedTo]="connectionList"
+              class="example-list" (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of todo4" cdkDrag>{{item}}</div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </div>
+      <div id="right-column" class="columns">
+        <div class="example-container">
+          <div *ngFor="let choiceList of choices; let i = index">
+            <h2>Choice {{i + 1}}</h2>
+            <div cdkDropList [id]="'choiceElement' + i" [cdkDropListData]="choices[i]"
+              [cdkDropListConnectedTo]="connectionList" class="example-list" (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of choices[i]" cdkDrag>{{item}}</div>
+            </div>
+          </div>
+          <p id='voted' [hidden]='!voted'>You've already voted for this survey</p>
+          <button mat-stroked-button [disabled]='voted' color="primary" (click)="saveChoiceOrder()"
+            routerLink="/student-thank-you">Submit</button>
+        </div>
+      </div>
     </div>

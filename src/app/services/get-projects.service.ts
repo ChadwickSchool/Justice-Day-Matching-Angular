@@ -16,16 +16,18 @@ export class GetProjectsService {
     this.projectNames = [];
    }
 
-  getProjects(uid: string) {
+  getProjectNames(sessionNum: number, category: string) {
+    const query = this.afs.collection<Projects>('projects', ref => ref
+      .where('sessionNumber', '==', sessionNum)
+      .where('category', '==', category));
+    return query.valueChanges();
+  }
+
+   getProjectsByStudent(uid: string) {
     this.afs.collection<Projects>('projects').valueChanges().subscribe(project => {
       project.forEach(project => project.students.forEach(student => {
-        console.log(project);
-        console.log(student);
-        console.log(uid);
         if (student === uid) {
-          console.log(project.projectName);
           this.projectNames.push(project.projectName);
-          console.log('p', this.projectNames);
         }
       }));
     });

@@ -14,6 +14,7 @@ import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
 import { User } from '../shared/models/user.model';
 import { StudentService } from '../services/student.service';
+import { GetProjectsService } from '../services/get-projects.service';
 
 /**
  * @title Drag&Drop connected sorting
@@ -26,11 +27,21 @@ import { StudentService } from '../services/student.service';
 export class StudentComponent2 implements OnInit {
   showChoices: boolean;
 
-  todo = ['Loading...'];
+  todo = [];
+
+  todo1 = [];
+
+  todo2 = [];
+
+  todo3 = [];
+
+  todo4 = [];
 
   assignedChoices = [];
 
   choices = [];
+
+  connectionList = ['todoElement1', 'todoElement2', 'todoElement3', 'todoElement4'];
 
   options: Options[];
 
@@ -45,6 +56,7 @@ export class StudentComponent2 implements OnInit {
   constructor(
     private saveChoiceService: SaveChoiceService,
     private getOptionsService: GetOptionsService,
+    private projectsService: GetProjectsService,
     private surveyVotersService: SurveyVotersService,
     private userService: UserService,
     private authService: AuthService,
@@ -59,13 +71,6 @@ export class StudentComponent2 implements OnInit {
     this.setUpUser();
     this.showTasks();
     this.showChoices = false;
-    // this.getOptionsService.getOptionsByName(this.surveyName).subscribe(options => {
-    //   this.todo = options[0].tasks;
-
-    //   for (let todo of this.todo) {
-    //     this.choices.push([]);
-    //   }
-    // });
   }
 
   async setUpUser() {
@@ -78,25 +83,30 @@ export class StudentComponent2 implements OnInit {
   }
 
   async hasVoted() {
-    console.log(this.studentService.hasVoted('session2', this.userId));
+    const val = await this.studentService.hasVoted('session2', this.userId);
     this.voted = await this.studentService.hasVoted('session2', this.userId);
-    console.log(this.voted);
+  }
+
+  subscribeTo(i) {
+    this.projectsService.getProjectNames(2, 'category ' + i).subscribe(projects => {
+      projects.forEach(project => {
+        this['todo' + i].push(project.projectName);
+      });
+    });
   }
 
   showTasks() {
     this.showChoices = true;
-    this.getOptionsService.getOptionsByName('session2').subscribe(options => {
-      this.todo = options[0].tasks;
-      this.choices = [];
-      for (let todo of this.todo) {
-        this.choices.push([]);
-      }
-    });
-    this.hasVoted();
-  }
 
-  choiceIDs() {
-    return this.choices.map((choice, i) => 'choice' + i).concat(['todo']);
+    for (let i = 0; i < 5; i++) {
+      this.connectionList.push('choiceElement' + i);
+      this.choices.push([]);
+    }
+
+    for (let i = 1; i < 5; i++) {
+      this.subscribeTo(i);
+    }
+    this.hasVoted();
   }
 
   hasExtras() {
@@ -130,7 +140,7 @@ export class StudentComponent2 implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
-    } else if (event.currentIndex === 0) {
+    } else if (event.currentIndex === 0 || event.container.id.startsWith('todoElement')) {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
@@ -138,13 +148,15 @@ export class StudentComponent2 implements OnInit {
         event.currentIndex
       );
 
-      while (this.hasExtras()) {
-        for (let i = 0; i < this.choices.length; i++) {
-          if (this.choices[i].length > 1) {
-            if (i < this.choices.length - 1) {
-              transferArrayItem(this.choices[i], this.choices[i + 1], 1, 0);
-            } else {
-              transferArrayItem(this.choices[i], this.todo, 1, 0);
+      if (!event.container.id.startsWith('todoElement')) {
+        while (this.hasExtras()) {
+          for (let i = 0; i < this.choices.length; i++) {
+            if (this.choices[i].length > 1) {
+              if (i < this.choices.length - 1) {
+                transferArrayItem(this.choices[i], this.choices[i + 1], 1, 0);
+              } else {
+                transferArrayItem(this.choices[i], this.todo, 1, 0);
+              }
             }
           }
         }
