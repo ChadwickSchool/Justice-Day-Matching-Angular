@@ -36,69 +36,66 @@ let prefdb = admin.firestore().collection("choices");
 // });
 
 //this one doesnt work
-function getRawScore(projName){
+async function getRawScore(projName){
     var i = 0;
     let projPrefs = prefdb.where("ranking", "array-contains", projName);
-    projPrefs.get().then(function(querySnapshot){
-        //I have tried using .size and .length instead of this for loop but it doenst work
+    await projPrefs.get().then(function(querySnapshot){
         querySnapshot.forEach(function(doc){
             pref = doc.data();
-            console.log(pref.uid);
             i = i+1;
         });
-        console.log(i);
-        //this part returns right score
-    }); 
+    });
     return i;
-    //this one doesnt
 }
 
-//this one doesnt work either
-function getRawScore (projName) {
-    return prefdb.where('ranking', 'array-contains', projName).get().then(q => q.size);
-  }
+// test getRawScore
+// console.log(getRawScore("Test Project 3"));
 
-// getRawScore("Test Project 3")
-console.log(getRawScore("Test Project 3"));
-
-//this one doesnt work either
-function getPopScore(projName){
+async function getPopScore(projName){
     let score = 0; 
     let projPrefs = prefdb.where('ranking', 'array-contains', projName);
-    projPrefs.get().then(function(querySnapshot) {
+    await projPrefs.get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             let pref = doc.data();
             for(let i=0; i<5;i++){
                 let currentPref = pref.ranking[i];
-                console.log(currentPref);
                 if(currentPref == projName){
                     score = score + (10-i);
                 }
             }
         });
-        console.log(score);
-        //this part returns the right score
     });
     return score;
-    //this part doesnt
 }
 
-// let test  = getPopScore("Test Project 7");
-// console.log(test);
+//test getPopScore
+// getPopScore("Test Project 7").then(test => {
+//     console.log(test);
+// });
 
 
-// //TODO FOR JACOB: make fields for project called popularityScore, rawScore, roomSize
+async function updateRawScore(){
+    let projects = projectdb.where("sessionNumber", "==", 2);
+    await projects.get().then(function (querySnapshot) {
+        querySnapshot.forEach(async function (doc) {
+            let proj = doc.data();
+            console.log(proj.projectName);
+            // proj.rawScore = await getRawScore(proj.projectName);
+            let project = projectdb.doc(proj.projectName);
+            project.update({
+                rawScore: await getRawScore(proj.projectName)
+            })
+            .then(function(){
+                console.log(proj.projectName + " updated");
+            })
+            .catch(function(error){
+                console.error("Error updating document: ", error);
+            });
+        });
+    });
+}
 
-// function updateRawScore(){
-//     let projects = projectdb;
-//     projects.get().then(function (querySnapshot) {
-//         querySnapshot.forEach(function (proj) {
-//             let projRScore = getRawScore(proj.projectName);
-//             proj.rawScore = projRScore;
-//             projectdb.doc(proj.id).update(proj);
-//         });
-//     });
-// }
+updateRawScore();
 
 // function updatePopScore(){
 //     let projects = projectdb;
