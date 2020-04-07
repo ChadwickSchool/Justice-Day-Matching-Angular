@@ -3,7 +3,7 @@ import {
   CdkDragDrop,
   moveItemInArray,
   transferArrayItem,
-  CdkDropList
+  CdkDropList,
 } from '@angular/cdk/drag-drop';
 import { SaveChoiceService } from '../services/save-choice.service';
 import { GetOptionsService } from '../services/get-options.service';
@@ -22,7 +22,7 @@ import { GetProjectsService } from '../services/get-projects.service';
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
-  styleUrls: ['./student.component.scss']
+  styleUrls: ['./student.component.scss'],
 })
 export class StudentComponent implements OnInit {
   showChoices: boolean;
@@ -43,7 +43,13 @@ export class StudentComponent implements OnInit {
 
   choices = [];
 
-  connectionList = ['todoElement1', 'todoElement2', 'todoElement3', 'todoElement4', 'todoElement5'];
+  connectionList = [
+    'todoElement1',
+    'todoElement2',
+    'todoElement3',
+    'todoElement4',
+    'todoElement5',
+  ];
 
   options: Options[];
 
@@ -62,7 +68,8 @@ export class StudentComponent implements OnInit {
     private surveyVotersService: SurveyVotersService,
     private userService: UserService,
     private authService: AuthService,
-    private studentService: StudentService) {
+    private studentService: StudentService
+  ) {
     this.voted = false;
     this.userId = '';
     this.options = [];
@@ -81,7 +88,10 @@ export class StudentComponent implements OnInit {
   }
 
   async showOptions() {
-    this.options = await this.getOptionsService.getOptions().pipe(take(1)).toPromise();
+    this.options = await this.getOptionsService
+      .getOptions()
+      .pipe(take(1))
+      .toPromise();
   }
 
   async hasVoted() {
@@ -90,11 +100,13 @@ export class StudentComponent implements OnInit {
   }
 
   subscribeTo(i) {
-    this.projectsService.getProjectNames(1, 'category ' + i).subscribe(projects => {
-      projects.forEach(project => {
-        this['todo' + i].push(project.projectName);
+    this.projectsService
+      .getProjectNames(1, 'category ' + i)
+      .subscribe((projects) => {
+        projects.forEach((project) => {
+          this['todo' + i].push(project.projectName);
+        });
       });
-    });
   }
 
   showTasks() {
@@ -142,7 +154,10 @@ export class StudentComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
-    } else if (event.currentIndex === 0 || event.container.id.startsWith('todoElement')) {
+    } else if (
+      event.currentIndex === 0 ||
+      event.container.id.startsWith('todoElement')
+    ) {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
