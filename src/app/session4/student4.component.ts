@@ -48,6 +48,7 @@ export class StudentComponent4 implements OnInit {
     'todoElement2',
     'todoElement3',
     'todoElement4',
+    'todoElement5',
   ];
 
   options: Options[];
@@ -116,7 +117,7 @@ export class StudentComponent4 implements OnInit {
       this.choices.push([]);
     }
 
-    for (let i = 1; i < 5; i++) {
+    for (let i = 1; i < 6; i++) {
       this.subscribeTo(i);
     }
     this.hasVoted();
