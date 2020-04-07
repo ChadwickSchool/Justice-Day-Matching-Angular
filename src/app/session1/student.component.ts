@@ -105,7 +105,7 @@ export class StudentComponent implements OnInit {
       this.choices.push([]);
     }
 
-    for (let i = 1; i < 5; i++) {
+    for (let i = 1; i < 6; i++) {
       this.subscribeTo(i);
     }
     this.hasVoted();
