@@ -24,6 +24,7 @@ export class SaveChoiceService {
   }
 
   addChoices(choices: Array<string>, surveyName: string, uid: string) {
+    console.log(choices);
     const id = this.afs.createId();
 
     const newRanking = new ChoiceClass(
