@@ -21,10 +21,10 @@ import { GetProjectsService } from '../services/get-projects.service';
  */
 @Component({
   selector: 'app-student',
-  templateUrl: './student2.component.html',
-  styleUrls: ['./student2.component.scss'],
+  templateUrl: './student3.component.html',
+  styleUrls: ['./student3.component.scss'],
 })
-export class StudentComponent2 implements OnInit {
+export class StudentComponent3 implements OnInit {
   showChoices: boolean;
 
   todo = [];
@@ -95,13 +95,13 @@ export class StudentComponent2 implements OnInit {
   }
 
   async hasVoted() {
-    const val = await this.studentService.hasVoted('session2', this.userId);
-    this.voted = await this.studentService.hasVoted('session2', this.userId);
+    const val = await this.studentService.hasVoted('session3', this.userId);
+    this.voted = await this.studentService.hasVoted('session3', this.userId);
   }
 
   subscribeTo(i) {
     this.projectsService
-      .getProjectNames(2, 'category ' + i)
+      .getProjectNames(3, 'category ' + i)
       .subscribe((projects) => {
         projects.forEach((project) => {
           this['todo' + i].push(project.projectName);
@@ -143,8 +143,8 @@ export class StudentComponent2 implements OnInit {
     for (let i = 0; i < this.choices.length; i++) {
       this.result[i] = this.choices[i][0];
     }
-    this.saveChoiceService.addChoices(this.result, 'session2', this.userId);
-    this.surveyVotersService.addSurveyVoters('session2', this.currentUser);
+    this.saveChoiceService.addChoices(this.result, 'session3', this.userId);
+    this.surveyVotersService.addSurveyVoters('session3', this.currentUser);
   }
 
   drop(event: CdkDragDrop<string[]>) {

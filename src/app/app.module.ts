@@ -7,6 +7,8 @@ import { environment } from 'src/environments/environment';
 import { TeacherComponent } from './teacher/teacher.component';
 import { StudentComponent } from './session1/student.component';
 import { StudentComponent2 } from './session2/student2.component';
+import { StudentComponent3 } from './session3/student3.component';
+import { StudentComponent4 } from './session4/student4.component';
 import { AppComponent } from './app.component';
 
 // firebase imports
@@ -27,6 +29,8 @@ import { StudentViewProjectsComponent } from './student-view-projects/student-vi
     TeacherComponent,
     StudentComponent,
     StudentComponent2,
+    StudentComponent3,
+    StudentComponent4,
     ViewDataComponent,
     LoginComponent,
     ThankYouComponent,

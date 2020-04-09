@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StudentComponent } from './session1/student.component';
-import { StudentComponent2 } from './session2/student2.component'
+import { StudentComponent2 } from './session2/student2.component';
+import { StudentComponent3 } from './session3/student3.component';
 import { TeacherComponent } from './teacher/teacher.component';
 import { ViewDataComponent } from './view-data/view-data.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
@@ -10,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { LoginGuard } from './shared/guards/login.guard';
 import { AdminGuard } from './shared/guards/admin.guard';
 import { StudentViewProjectsComponent } from './student-view-projects/student-view-projects.component';
+import { StudentComponent4 } from './session4/student4.component';
 
 const routes: Routes = [
   {
@@ -31,6 +33,16 @@ const routes: Routes = [
     component: StudentComponent2,
     canActivate: [LoginGuard]
 
+  },
+  {
+    path: 'session3',
+    component: StudentComponent3,
+    canActivate: [LoginGuard]
+  },
+  {
+    path: 'session4',
+    component: StudentComponent4,
+    canActivate: [LoginGuard]
   },
   {
     path: 'teacher',
