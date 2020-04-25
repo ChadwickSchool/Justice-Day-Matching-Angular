@@ -140,11 +140,14 @@ export class StudentComponent2 implements OnInit {
   }
 
   saveChoiceOrder(event: CdkDragDrop<Array<string>>) {
-    for (let i = 0; i < this.choices.length; i++) {
-      this.result[i] = this.choices[i][0];
+    if (confirm('Are you sure you want to submit? This decision is final.')) {
+      for (let i = 0; i < this.choices.length; i++) {
+        this.result[i] = this.choices[i][0];
+      }
+      this.saveChoiceService.addChoices(this.result, 'session2', this.userId);
+      this.surveyVotersService.addSurveyVoters('session2', this.currentUser);
+      window.location.href = '/session3';
     }
-    this.saveChoiceService.addChoices(this.result, 'session2', this.userId);
-    this.surveyVotersService.addSurveyVoters('session2', this.currentUser);
   }
 
   drop(event: CdkDragDrop<string[]>) {
