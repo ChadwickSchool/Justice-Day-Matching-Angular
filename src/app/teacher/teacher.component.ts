@@ -30,10 +30,10 @@ export class TeacherComponent implements OnInit {
   }
   submitOptions() {
     this.hasSubmitted = true;
-    this.saveOptionService.addOptions(this.surveyName, 'test');
-    // for (let i = 0; i < 50; i++) {
-    //   this.saveOptionService.createData();
-    // }
+    // this.saveOptionService.addOptions(this.surveyName, 'test');
+    for (let i = 0; i < 500; i++) {
+      this.saveOptionService.createData();
+    }
   }
 
   indexTracker(index: number, value: any) {

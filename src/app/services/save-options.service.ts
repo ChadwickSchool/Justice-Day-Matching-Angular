@@ -58,21 +58,24 @@ export class SaveOptionsService {
 
   createChoices(randomString: string) {
     for (let i = 1; i < 2; i++) {
-    const id = this.afs.createId();
-    const choices = [
-      'Apex(' + i + ') Project ' + (Math.floor(Math.random() * 25) + 1),
-      'Apex(' + i + ') Project ' + (Math.floor(Math.random() * 25) + 1),
-      'Apex(' + i + ') Project ' + (Math.floor(Math.random() * 25) + 1),
-      'Apex(' + i + ') Project ' + (Math.floor(Math.random() * 25) + 1),
-      'Apex(' + i + ') Project ' + (Math.floor(Math.random() * 25) + 1)
-    ];
-    const newChoice = new ChoiceClass(
-      id,
-      randomString,
-      'session' + i,
-      choices
-    );
-    this.choicesRef.doc(id).set(Object.assign({}, newChoice));
+      const id = this.afs.createId();
+      const choices = [];
+      while (choices.length < 4) {
+        const newNumber = (Math.floor(Math.random() * 25) + 1);
+        if (choices.includes(newNumber)) {
+          continue;
+        } else {
+          choices.push('Apex(' + i + ') Project ' + newNumber);
+        }
+      }
+      const newChoice = new ChoiceClass(
+        id,
+        randomString,
+        'session' + i,
+        choices
+        );
+      this.choicesRef.doc(id).set(Object.assign({}, newChoice));
+      console.log('creating choices');
     }
   }
 
